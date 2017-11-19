@@ -1,21 +1,14 @@
-int selectSort(int arr[], int n)
+void selectSort(int arr[], int n)
 {
-	int pos_min, temp; //TEMPY
-
-	for (int i=0; i<n-1; i++)
-	{
-	    pos_min = i;
-		
-		for (int j=i+1; j<n; j++)
-			if (arr[j]<arr[pos_min])
-	            pos_min=j;
-        if (pos_min != i){
-             temp = arr[i];
-             arr[i] = arr[pos_min];
-             arr[pos_min] = temp;
-        }
+	int min=666, temp;
+	for (int i=0; i<n; i++){
+		for (int j=i; j<n; j++)
+			if (arr[i]>arr[j]){
+				temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
 	}
-	return arr;
 }
 
 int minimum (int array[], int size){
@@ -27,6 +20,12 @@ int minimum (int array[], int size){
 	return min;
 }
 
+void printArray(int arr[], char message){
+	printf("%s\n", message);
+	for (int i=0; i<5; i++)
+		printf("%d) %d\n", i, arr[i]);
+}
+
 int main(){
 	
 	int array[5];
@@ -36,11 +35,11 @@ int main(){
 	array[3] = 3;
 	array[4] = 55;
 	
-	printf("%d", minimum(array,5));
-	int elos[5];
-	elos = selectSort(array, 5);
+	printf("Najmniejsze: %d\n", minimum(array,5));
 	
-	for (int i=0; i<5; i++)
-		print("%d\n", elos);
+	selectSort(&array, 5);
+	
+	printArray(array, "Posortowana tablica");
+	
 	return 0;
 }
